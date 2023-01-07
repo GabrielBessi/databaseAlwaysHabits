@@ -1,11 +1,12 @@
 import { hashSync } from "bcryptjs";
+import { Exclude } from "class-transformer";
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -29,6 +30,7 @@ class User {
   email: string;
 
   @Column({ length: 120 })
+  @Exclude()
   password: string;
 
   @CreateDateColumn()
@@ -37,14 +39,14 @@ class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Habits, (habit) => habit.user)
+  @OneToMany(() => Habits, (habit) => habit.user)
   habits: Habits[];
 
-  @BeforeUpdate()
-  @BeforeInsert()
-  hashPassword() {
-    this.password = hashSync(this.password, 10);
-  }
+  // @BeforeUpdate()
+  // @BeforeInsert()
+  // hashPassword() {
+  //   this.password = hashSync(this.password, 10);
+  // }
 }
 
 export { User };

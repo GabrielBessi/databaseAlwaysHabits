@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { User } from "./user.entities";
 
 @Entity("habits")
@@ -18,13 +25,13 @@ class Habits {
   @Column({ default: "Pendente" })
   status: string;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => User, (user) => user.habits)
+  @ManyToOne(() => User, (user) => user.habits)
   user: User;
 }
 
