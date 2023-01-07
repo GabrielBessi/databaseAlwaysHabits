@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { json } from "stream/consumers";
 import createHabitServices from "../../services/habits/createHabit.services";
+import deletedHabitService from "../../services/habits/deletedHabit.services";
 import lisHabitsIdServices from "../../services/habits/listHabitsId.services";
 import updatedHabitsService from "../../services/habits/updatedHabits.services";
 
@@ -13,9 +13,7 @@ const createHabitController = async (req: Request, res: Response) => {
 };
 
 const listHabitsIdController = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-
-  const habits = await lisHabitsIdServices(id);
+  const habits = await lisHabitsIdServices();
 
   return res.json(habits);
 };
@@ -29,8 +27,17 @@ const updatedHabitsController = async (req: Request, res: Response) => {
   return res.json(habits);
 };
 
+const deletedHabitController = async (req: Request, res: Response) => {
+  const idHabit = parseInt(req.params.id);
+
+  const message = await deletedHabitService(idHabit);
+
+  return res.json(message);
+};
+
 export {
   createHabitController,
   listHabitsIdController,
   updatedHabitsController,
+  deletedHabitController,
 };

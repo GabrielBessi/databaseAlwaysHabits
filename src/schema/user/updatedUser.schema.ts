@@ -4,25 +4,19 @@ import {
   IUserUpdated,
   IUserUpdatedResponse,
 } from "../../interfaces/user.interface";
+import { hashSync } from "bcryptjs";
 
 const updatedUserSchema: SchemaOf<IUserUpdated> = yup.object().shape({
   name: yup.string().notRequired(),
   photo: yup.string().notRequired(),
   activity: yup.string().notRequired(),
   email: yup.string().email().notRequired(),
-  password: yup.string().notRequired(),
+  password: yup
+    .string()
+    .notRequired()
+    .transform((pass) => {
+      return hashSync(pass, 10);
+    }),
 });
 
-const userWhithoutPasswordSerializer: SchemaOf<IUserUpdatedResponse> = yup
-  .object()
-  .shape({
-    id: yup.number().notRequired(),
-    name: yup.string().notRequired(),
-    photo: yup.string().notRequired(),
-    activity: yup.string().notRequired(),
-    email: yup.string().email().notRequired(),
-    createdAt: yup.date().notRequired(),
-    updatedAt: yup.date().notRequired(),
-  });
-
-export { updatedUserSchema, userWhithoutPasswordSerializer };
+export { updatedUserSchema };

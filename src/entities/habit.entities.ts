@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -30,6 +31,12 @@ class Habits {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column({ default: true })
+  isActive: boolean;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   @ManyToOne(() => User, (user) => user.habits)
   user: User;

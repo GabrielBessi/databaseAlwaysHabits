@@ -1,8 +1,5 @@
-import { hashSync } from "bcryptjs";
 import { Exclude } from "class-transformer";
 import {
-  BeforeInsert,
-  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -41,12 +38,6 @@ class User {
 
   @OneToMany(() => Habits, (habit) => habit.user)
   habits: Habits[];
-
-  // @BeforeUpdate()
-  // @BeforeInsert()
-  // hashPassword() {
-  //   this.password = hashSync(this.password, 10);
-  // }
 }
 
 export { User };

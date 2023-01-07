@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createHabitController,
+  deletedHabitController,
   listHabitsIdController,
   updatedHabitsController,
 } from "../../controllers/habits/habit.controller";
@@ -20,12 +21,7 @@ habitRouter.post(
   createHabitController
 );
 
-habitRouter.get(
-  "/:id",
-  ensureTokenMiddleware,
-  validateIdUserMiddleware,
-  listHabitsIdController
-);
+habitRouter.get("", ensureTokenMiddleware, listHabitsIdController);
 
 habitRouter.patch(
   "/:id",
@@ -33,6 +29,13 @@ habitRouter.patch(
   validateHabitIdMiddleware,
   validateDataSerializer(updatedHabitSchema),
   updatedHabitsController
+);
+
+habitRouter.delete(
+  "/:id",
+  ensureTokenMiddleware,
+  validateHabitIdMiddleware,
+  deletedHabitController
 );
 
 export default habitRouter;

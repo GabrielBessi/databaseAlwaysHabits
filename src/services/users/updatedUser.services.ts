@@ -4,7 +4,6 @@ import {
   IUserUpdated,
   IUserUpdatedResponse,
 } from "../../interfaces/user.interface";
-import { userWhithoutPasswordSerializer } from "../../schema/user/updatedUser.schema";
 
 const updatedUserService = async (
   dataUser: IUserUpdated,
@@ -16,22 +15,12 @@ const updatedUserService = async (
     id: idUser,
   });
 
-  console.log(dataUser);
   const updatedUser = userRepository.create({
     ...user,
     ...dataUser,
   });
 
   await userRepository.save(updatedUser);
-
-  // const updatedWithoutPassword = await userWhithoutPasswordSerializer.validate(
-  //   updatedUser,
-  //   {
-  //     stripUnknown: true,
-  //   }
-  // );
-
-  // console.log(updatedWithoutPassword);
 
   return updatedUser;
 };

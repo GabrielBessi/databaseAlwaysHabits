@@ -17,11 +17,11 @@ const loginUserService = async (dataLogin: ILoginRequest): Promise<string> => {
     throw new AppError("Email invalid", 403);
   }
 
-  // const validatePassword = await compare(dataLogin.password, user.password);
+  const validatePassword = await compare(dataLogin.password, user.password);
 
-  // if (!validatePassword) {
-  //   throw new AppError("Password invalid", 403);
-  // }
+  if (!validatePassword) {
+    throw new AppError("Password invalid", 403);
+  }
 
   const token = jwt.sign(
     {
