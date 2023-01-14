@@ -30,7 +30,6 @@ const setDataSourceConfig = (): DataSourceOptions => {
     };
   }
 
-  // const AppDataSource = new DataSource(
   return {
     type: "postgres",
     host: process.env.PGHOST,
@@ -46,5 +45,3 @@ const setDataSourceConfig = (): DataSourceOptions => {
 };
 
 export const AppDataSource = new DataSource(setDataSourceConfig());
-
-// export default new DataSource(AppDataSource);
