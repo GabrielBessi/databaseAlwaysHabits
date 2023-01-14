@@ -10,7 +10,7 @@ const deletedHabitService = async (idHabit: number) => {
   });
 
   if (!habit.isActive) {
-    throw new AppError("User not Active", 400);
+    throw new AppError("User not Active", 403);
   }
 
   await habitRepository.softRemove(habit);
