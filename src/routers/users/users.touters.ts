@@ -9,11 +9,13 @@ import validateDataSerializer from "../../serializers/validadeData.serializers";
 import ensureTokenMiddleware from "../../middleware/ensureToken.middleware";
 import validateIdUserMiddleware from "../../middleware/validateIdUser.middleware";
 import { updatedUserSchema } from "../../schema/user/updatedUser.schema";
+import validatedEmailMiddleware from "../../middleware/validatedEmail.middleware";
 
 const userRouter = Router();
 
 userRouter.post(
   "",
+  validatedEmailMiddleware,
   validateDataSerializer(createUserSchema),
   createUserController
 );

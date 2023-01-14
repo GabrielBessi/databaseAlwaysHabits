@@ -8,10 +8,6 @@ const createUserServices = async (dataUser: IUserRequest): Promise<User> => {
 
   const user = userRepository.create(dataUser);
 
-  if (user) {
-    throw new AppError("User already exists", 403);
-  }
-
   await userRepository.save(user);
 
   return user;
