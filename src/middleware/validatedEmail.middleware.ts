@@ -17,8 +17,6 @@ const validatedEmailMiddleware = async (
     email: dataUser.email,
   });
 
-  console.log(emailUser);
-
   if (emailUser) {
     throw new AppError("User already exists", 403);
   }
